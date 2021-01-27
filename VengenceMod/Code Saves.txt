@@ -1,0 +1,32 @@
+public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+HelmetMagic.mystic			player.magicDamage *= 0.2f;
+		}
+
+
+public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+Legging.Mystic			player.moveSpeed *= 1.1f;
+			player.maxRunSpeed *= 1.1f;
+		}
+
+
+	public override void UpdateAccessory(Player player, bool hideVisual)
+		{
+Helmet.Mystic			player.meleeDamage *= 0.2f;
+			player.rangedDamage *= 0.2f;
+		}
+  public override void BossLoot(ref string name, ref int potionType)
+        {
+            potionType = ItemID.GreaterHealingPotion;
+VScourgeH   Item.NewItem(npc.getRect(), ItemType<VoidCells>(), 10);
+            Item.NewItem(npc.getRect(), ItemType<VoidBar>(), 10);
+        }
+public override void AddRecipes()
+		{
+VoidBar			ModRecipe recipe = new ModRecipe(mod);
+			recipe.AddIngredient(ModContent.ItemType<VoidCells>(), 2);
+			recipe.Addtile(TileType<VoidCrucible>);
+			recipe.SetResult(this);
+			recipe.AddRecipe();
+		}

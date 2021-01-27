@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "v0dO8TbI6234VvWr4VJ0+v3DeZRq2AUY5llOmMOwT076j7P3DZg0e2CyqNsnTgpUDVo0q6nqFej8MAvnYiPLEw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pc\\Documents\\My Games\\Terraria\\ModLoader\\Mod Sources\\VengenceMod\\VengenceMod.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pc\\.nuget\\packages\\tmodloader.codeassist\\0.1.1\\tmodloader.codeassist.0.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}
