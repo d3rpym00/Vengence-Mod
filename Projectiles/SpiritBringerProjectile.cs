@@ -32,7 +32,7 @@ namespace VengenceMod.Projectiles
 			projectile.velocity.Y += projectile.ai[0];
 
             // makes dust behind it each tick
-            Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, DustType<VoidDust>(), projectile.velocity.X * -0.5f, projectile.velocity.Y * -0.5f);
+            Dust.NewDust(projectile.position + projectile.velocity, projectile.width, projectile.height, DustType<CosmicPinkDust>(), projectile.velocity.X * -0.5f, projectile.velocity.Y * -0.5f);
 
             // homing ai
             float num132 = (float)Math.Sqrt((double)(projectile.velocity.X * projectile.velocity.X + projectile.velocity.Y * projectile.velocity.Y));
@@ -120,7 +120,7 @@ namespace VengenceMod.Projectiles
                     projectile.velocity.Y = (projectile.velocity.Y * (float)(num149 - 1) + num147) / (float)num149;
                 }
         }
-
+        
         public override void Kill(int timeLeft)
         {
             Collision.HitTiles(projectile.position, projectile.velocity, projectile.width, projectile.height); // makes dust based on tile hit
