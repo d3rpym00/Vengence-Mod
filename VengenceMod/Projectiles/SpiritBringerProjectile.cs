@@ -13,7 +13,25 @@ namespace VengenceMod.Projectiles
         {
             DisplayName.SetDefault("Spirit Bringer Fire");
         }
+
+        public override void SetDefaults()
+        {
+            projectile.width = 10;
+            projectile.height = 15;
+            projectile.friendly = true;
+            projectile.penetrate = -1;
+            projectile.melee = true;
+            projectile.aiStyle = -1;
+            projectile.tileCollide = true;
+        }
+
+        public override void AI()
+        {
+            float velXMult = 0.25f;
+            projectile.velocity.X += velXMult;
+
+            float velYMult = 0.25f;
+            projectile.velocity.Y += velYMult;
+        }
     }
 }
-
-// https://www.youtube.com/watch?v=R7korB9hcp8 <-- tutorial for creating a projectile
