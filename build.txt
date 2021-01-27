@@ -1,0 +1,3 @@
+displayName = Vengence Mod
+author = CallieBrimStone
+version = 1.0.5
