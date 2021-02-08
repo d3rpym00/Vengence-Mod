@@ -1,16 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-<<<<<<< Updated upstream
-    "\\Dusts"
-  ],
-  "SelectedNode": "\\Items",
-=======
     "\\NPCs",
     "\\NPCs\\Boss",
-    "\\NPCs\\Boss\\Teratora"
+    "\\NPCs\\Boss\\Teratora",
+    "\\Sounds",
+    "\\Sounds\\Music"
   ],
-  "SelectedNode": "\\NPCs\\Boss\\Teratora\\Teratora.cs",
->>>>>>> Stashed changes
+  "SelectedNode": "\\Sounds\\Music\\Teratora.mp3",
   "PreviewInSolutionExplorer": false
 }
