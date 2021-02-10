@@ -1,4 +1,4 @@
-using VengenceMod.NPCs.Boss;
+using VengenceMod.NPCs.Boss.MegaPinky;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
@@ -34,12 +34,12 @@ namespace VengenceMod.Items.Summon
 		public override bool CanUseItem(Player player)
 		{
 			// "player.ZoneUnderworldHeight" could also be written as "player.position.Y / 16f > Main.maxTilesY - 200"
-			return NPC.downedPlantBoss && player.ZoneUnderworldHeight && !NPC.AnyNPCs(NPCType<NPCs.Boss.MegaPinky>());
+			return NPC.downedPlantBoss && player.ZoneUnderworldHeight && !NPC.AnyNPCs(NPCType<NPCs.Boss.MegaPinky.MegaPinky>());
 		}
 
 		public override bool UseItem(Player player)
 		{
-			NPC.SpawnOnPlayer(player.whoAmI, NPCType<NPCs.Boss.MegaPinky>());
+			NPC.SpawnOnPlayer(player.whoAmI, NPCType<NPCs.Boss.MegaPinky.MegaPinky>());
 			Main.PlaySound(SoundID.Roar, player.position, 0);
 			return true;
 		}

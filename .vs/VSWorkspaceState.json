@@ -1,12 +1,12 @@
 {
   "ExpandedNodes": [
     "",
+    "\\Items\\Summon",
     "\\NPCs",
     "\\NPCs\\Boss",
     "\\NPCs\\Boss\\Teratora",
-    "\\Sounds",
-    "\\Sounds\\Music"
+    "\\NPCs\\Boss\\TeratoraUPDATED"
   ],
-  "SelectedNode": "\\Sounds\\Music\\Teratora.mp3",
+  "SelectedNode": "\\NPCs\\Boss\\TeratoraUPDATED\\TripleTeslaBeam.png",
   "PreviewInSolutionExplorer": false
 }

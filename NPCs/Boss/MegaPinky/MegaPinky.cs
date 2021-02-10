@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using VengenceMod.Items.Meterials;
 using static Terraria.ModLoader.ModContent;
 
-namespace VengenceMod.NPCs.Boss
+namespace VengenceMod.NPCs.Boss.MegaPinky
 {
     [AutoloadBossHead]
     public class MegaPinky : ModNPC
@@ -21,7 +21,7 @@ namespace VengenceMod.NPCs.Boss
         public override void SetDefaults()
         {
 
-            npc.aiStyle = 1; //Slime AI, i would like to know king slimes AI but this works just the same.
+            npc.aiStyle = 1; // Slime AI, i would like to know king slimes AI but this works just the same.
             npc.lifeMax = 3500;
             npc.damage = 15;
             npc.defense = 0;
