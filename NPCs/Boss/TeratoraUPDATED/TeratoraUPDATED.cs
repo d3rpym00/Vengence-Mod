@@ -15,6 +15,7 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
         int moveType = 0;
         int shootDelay = 0;
         int shootCooldown = 2 * 60;
+        int shootCooldown2 = 2 * 45;
 
         public override void SetStaticDefaults()
         {
@@ -86,7 +87,20 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
                 shootDelay = Main.rand.Next(0, 60);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TripleTeslaBeam>(), (int)(npc.damage / 2), 3, Main.myPlayer);
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TeslaBeam>(), (int)(npc.damage / 2), 3, Main.myPlayer);
+                }
+            }
+        }
+
+        private void Shoot2(NPC npc)
+        {
+            shootDelay++;
+            if (shootDelay > shootCooldown2)
+            {
+                shootDelay = Main.rand.Next(0, 45);
+                if (Main.netMode != 1)
+                {
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TripleTeslaBeam>(), (int)(npc.damaga / 2), 3, Main.myPlayer);
                 }
             }
         }
