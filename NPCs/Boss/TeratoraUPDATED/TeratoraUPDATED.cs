@@ -51,7 +51,9 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
         public override void AI()
         {
             UpdateValues();
-            Track(npc);
+            Track2(npc);
+            // Dash(npc);
+            // Track(npc);
         }
 
         private void UpdateValues()
@@ -79,6 +81,12 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
             Shoot(npc);
         }
 
+        private void Track2(NPC npc)
+        {
+            npc.position = Main.player[npc.target].Center + new Vector2(-350, -50);
+            Shoot2(npc);
+        }
+
         private void Shoot(NPC npc)
         {
             shootDelay++;
@@ -87,21 +95,20 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
                 shootDelay = Main.rand.Next(0, 60);
                 if (Main.netMode != 1)
                 {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TeslaBeam>(), (int)(npc.damage / 2), 3, Main.myPlayer);
+                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TeslaBeam2>(), (int)(npc.damage / 2), 3, Main.myPlayer);
                 }
             }
         }
 
         private void Shoot2(NPC npc)
         {
-            shootDelay++;
-            if (shootDelay > shootCooldown2)
+            float numProjectiles = 3;
+            float rotation = MathHelper.ToRadians(60);
+
+            if (shootDelay > shootCooldown) 
             {
-                shootDelay = Main.rand.Next(0, 45);
-                if (Main.netMode != 1)
-                {
-                    Projectile.NewProjectile(npc.Center.X, npc.Center.Y, 0, 0, ModContent.ProjectileType<TripleTeslaBeam>(), (int)(npc.damaga / 2), 3, Main.myPlayer);
-                }
+                Vector2 rotationSpeed = new Vector2(100f, 100f).RotatedBy(MathHelper.Lerp(-rotation, rotation, numProjectiles));
+                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, rotationSpeed.X, rotationSpeed.Y, ModContent.ProjectileType<TeslaBeam2>(), (int)(npc.damage / 2), 3, Main.myPlayer);
             }
         }
 
