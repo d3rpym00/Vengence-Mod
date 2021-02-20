@@ -11,11 +11,19 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
     [AutoloadBossHead]
     public class TeratoraUPDATED : ModNPC
     {
-        float theta = 0;
         int moveType = 0;
+        int moveCounter = 0;
         int shootDelay = 0;
+        int shootDelay2 = 0;
         int shootCooldown = 2 * 60;
         int shootCooldown2 = 2 * 45;
+        Vector2 targetPos;
+        public bool killBoss = false;
+        public float tVel = 0f;
+        public float vel = 0f;
+        public float vMax = 10f;
+        public float vAccel = 0.2f;
+        public float vMag = 0f;
 
         public override void SetStaticDefaults()
         {
@@ -24,6 +32,17 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
 
         public override void SetDefaults()
         {
+            tVel = 0f;
+            vel = 0f;
+            vMax = 10f;
+            vAccel = 0.2f;
+            vMag = 0f;
+            killBoss = false;
+            moveType = 0;
+            moveCounter = 0;
+            shootCooldown = 2 * 60;
+            shootCooldown2 = 2 * 45;
+            shootDelay = 0;
             npc.boss = true;
             npc.width = 78;
             npc.height = 78;
@@ -50,41 +69,97 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
 
         public override void AI()
         {
-            UpdateValues();
-            Track2(npc);
-            // Dash(npc);
-            // Track(npc);
-        }
-
-        private void UpdateValues()
-        {
-            theta += (float)Math.PI / 90;
-            if (theta > (float)Math.PI * 2)
+            if (npc.target < 0 || npc.target == 255 || Main.player[npc.target].dead || !Main.player[npc.target].active) 
             {
-                theta -= (float)Math.PI * 2;
+                npc.TargetClosest();
             }
+            
+            bool dead = Main.player[npc.target].dead;
 
+            if (dead)
+            {
+                Death(npc);
+                return; 
+            }
+            
+            CheckMoveType();            
             if (moveType == 0)
             {
-                npc.rotation = 0;
+                Track2(npc);
+            }
+            else if (moveType == 1)
+            {
+                Dash(npc);
+            }
+            else if (moveType == 2)
+            {
+                Track(npc);
+            }
+        }
+
+        private void CheckMoveType()
+        {
+            moveCounter++;
+            if (moveCounter > 9 * 60 + 2)
+            {
+                moveCounter = 0;
+                moveType++;
             }
 
-            else
+            if (moveType == 3)
             {
-                npc.rotation = (float)Math.Atan2((double)npc.velocity.Y, (double)npc.velocity.X) - 1.57f;
+                moveType = 0;
             }
         }
 
         private void Track(NPC npc)
         {
             npc.position = Main.player[npc.target].Center + new Vector2(-50, -300);
+            npc.rotation = 0;
             Shoot(npc);
         }
 
         private void Track2(NPC npc)
         {
             npc.position = Main.player[npc.target].Center + new Vector2(-350, -50);
+			// npc.rotation = (float)Math
             Shoot2(npc);
+        }
+
+        private void Dash(NPC npc)
+        {
+            float dist = Vector2.Distance(targetPos, npc.Center);
+            tVel = dist / 15;
+            if (vMag < vMax && vMag < tVel)
+            {
+                vMag += vAccel;
+                vMag = tVel;
+            }
+
+            if (vMag > tVel)
+            {
+                vMag = tVel;
+            }
+
+            if (vMag > vMax)
+            {
+                vMag = vMax;
+            }
+
+            if (dist != 0)
+            {
+                npc.velocity = npc.DirectionTo(targetPos) * vMag;
+            }
+        }
+
+        private void Death(NPC npc)
+        {
+            npc.velocity.Y = -10f;
+            
+            if (npc.timeLeft > 30)
+            {
+                npc.timeLeft = 30;
+            }
         }
 
         private void Shoot(NPC npc)
@@ -102,14 +177,7 @@ namespace VengenceMod.NPCs.Boss.TeratoraUPDATED
 
         private void Shoot2(NPC npc)
         {
-            float numProjectiles = 3;
-            float rotation = MathHelper.ToRadians(60);
-
-            if (shootDelay > shootCooldown) 
-            {
-                Vector2 rotationSpeed = new Vector2(100f, 100f).RotatedBy(MathHelper.Lerp(-rotation, rotation, numProjectiles));
-                Projectile.NewProjectile(npc.Center.X, npc.Center.Y, rotationSpeed.X, rotationSpeed.Y, ModContent.ProjectileType<TeslaBeam2>(), (int)(npc.damage / 2), 3, Main.myPlayer);
-            }
+            
         }
 
         public override void BossLoot(ref string name, ref int potionType)
